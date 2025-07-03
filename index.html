@@ -52,6 +52,22 @@
             color: #00d4aa;
         }
 
+        .x-link {
+            background: linear-gradient(45deg, #00d4aa, #00a8ff);
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            text-decoration: none !important;
+        }
+
+        .x-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 212, 170, 0.3);
+            color: white !important;
+        }
+
         .wallet-btn {
             background: linear-gradient(45deg, #00d4aa, #00a8ff);
             border: none;
@@ -393,6 +409,7 @@
         <ul class="nav-links">
             <li><a href="#create" onclick="showSection('create')">Create</a></li>
             <li><a href="#docs" onclick="showSection('docs')">Docs</a></li>
+            <li><a href="https://x.com/launchpads100x" target="_blank" class="x-link">𝕏</a></li>
         </ul>
         <button class="wallet-btn" id="wallet-btn" onclick="connectWallet()">
             <span id="wallet-text">Connect Wallet</span>
@@ -770,6 +787,11 @@
             const name = document.getElementById('coin-name').value;
             const ticker = document.getElementById('coin-ticker').value;
             
+            if (!walletConnected) {
+                alert('Please connect your wallet first');
+                return;
+            }
+            
             if (!name || !ticker) {
                 alert('Please fill in coin name and ticker');
                 return;
@@ -807,6 +829,9 @@
 
         // Add some interactive effects
         document.addEventListener('DOMContentLoaded', function() {
+            // Check for existing wallet connection
+            checkWalletConnection();
+            
             // Animate cards on scroll
             const cards = document.querySelectorAll('.platform-card');
             cards.forEach((card, index) => {
